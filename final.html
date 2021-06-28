@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<!-- Jesus Vasquez-Cipriano, Created February 2021.
+
+This HTML document produces a web form to capture the initial user information needed for a
+Short Message Text application to communicate with a user's cell phone to execute the program's function.
+
+-->
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Text Message Reminder of Upcoming Free-Trial Expirations</title>
+		
+		<style>
+			body { 
+				background-image: url("background.jpg");
+			}
+			.introduction {
+  				text-align: center;
+  				border: 5px solid green;
+  				padding-top: 30px;
+  				padding-right: 10px;
+  				padding-bottom: 30px;
+  				padding-left: 10px;
+			}
+			ul {
+				display: table;
+				text-align: left;
+  				margin: 0 auto;
+			}
+			.form {
+				font-weight: bolder;
+				text-align: center;
+			}
+		</style>
+     	<script>
+     		document.addEventListener('DOMContentLoaded', function() {
+     		
+     		//update the max and min date restrictions on the form's calendar.
+     		updateDateRestrictions();
+     		});
+     		
+     		function updateDateRestrictions() {
+     			let minDate = new Date(),
+     			day = minDate.getDate()+3,
+     			month = minDate.getMonth()+1,
+     			year = minDate.getFullYear();
+     				if(day<10){
+     					day='0'+day
+     				}
+     				if(month<10){
+     					month='0'+month
+     				}
+     			minDate = year+'-'+month+'-'+day;
+     			
+     			next_month = parseInt(month) + 1;
+     				if(next_month<10){
+     					next_month='0'+next_month
+     				}
+     				
+     			maxDate = year+'-'+next_month+'-'+day;
+     			    		
+     			document.getElementById("expiration_date").setAttribute("min",minDate);
+     			document.getElementById("expiration_date").setAttribute("max",maxDate);
+     		}
+     	</script>
+
+	</head>
+
+	<body>
+		<div class="introduction">
+		<h1>Welcome. I am a Short Message Text application.</h1>
+		<p>I can send you texts reminders of upcoming free-trial expirations, preventing you from forgetting to cancel and being billed the subscription cost!<br>
+		You will receive a text reminder 1 day before your expiration date. Below, please enter the necessary information.</p>
+		<p><strong>Guidelines:</strong></p>
+		<ul>
+			<li>Free-trial expiration dates must be at least 3 days and at most 30 days from today.</li>
+			<li>We can only remind you of subscription costs of $0.99 or greater per month.</li>
+		</ul>
+		</div>
+		<br>
+		
+		<div class="form">
+		<form method = "post" action = "http://www.foo.com" name ="form1" autocomplete="on">
+			<p>
+				<label for="first_name">First Name:<br></label>
+					<input type = "text" id="first_name" name = "first_name" required />
+			</p>
+			<p>
+				<label for="last_name">Last Name:<br></label>
+					<input type = "text" id="last_name" name = "last_name" required />
+			</p>
+			<p>
+				<label for = "subscription_name">Name of Subscription:<br></label>
+					<input type = "text" id="subscription_name" name = "subscription_name" required placeholder = "Amazon Prime"/>
+			</p> 
+			<p>
+				<label for = "expiration_date">When does your free-trial expire?<br></label>
+					<input type = "date" id="expiration_date" name = "expiration_date" required />
+			</p>
+			<p>
+				<label for="cost">After the free-trial, how much will you be charged per month?<br></label>
+					$
+					<input type = "number" id="cost" min=".99" step="0.01" name = "cost" placeholder = "29.99" required />
+			</p>
+			<p>
+				<label for = "phone">Telephone Number for Text:<br></label>
+					<input type = "text" id="phone" name = "phone" placeholder = "8004443333" required minlength="10" maxlength="10" pattern="^\d{10}$" />
+					<br>
+					<span style="font-weight: normal">(input 10 numbers without any special characters)</span>
+
+			</p>
+			<p>
+				<label for = "email">E-mail:<br></label>
+					<input type = "email" id="email" name = "email" placeholder = "name@domain.com" required />
+			</p>		
+			<p>
+				<input type = "submit" value="Submit"/>
+				<input type = "reset" value="Reset" />
+			</p>
+		</form>
+		</div>
+	</body>
+
+</html>
